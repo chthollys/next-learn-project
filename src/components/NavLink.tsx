@@ -1,6 +1,6 @@
 "use client";
 
-import { NavLinkProps } from "~/lib/types";
+import { NavLinkProps } from "~/lib/definitions";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import classes from "./NavLink.module.css";

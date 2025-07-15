@@ -1,0 +1,23 @@
+generator client {
+  provider        = "prisma-client"
+  output          = "../src/generated/prisma"
+  previewFeatures = ["strictUndefinedChecks"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model meal {
+  id            Int    @id @default(autoincrement())
+  slug          String @unique
+  title         String
+  image         String
+  summary       String
+  instructions  String
+  creator       String
+  creator_email String @map("creator_email")
+
+  @@map("meals")
+}

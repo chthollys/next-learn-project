@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import classes from "./MealItem.module.css";
-import { Meal } from "~/lib/types";
+import { Meal } from "~/lib/definitions";
 
 interface MealItemProps {
   meal: Meal;

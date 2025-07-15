@@ -1,4 +1,4 @@
-import { Meal } from "~/lib/types";
+import { Meal } from "~/lib/definitions";
 import classes from "./MealsGrid.module.css";
 import MealItem from "./MealItem";
 
