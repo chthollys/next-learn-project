@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import MainHeader from "@/components/MainHeader";
-import MainHeaderBackground from "@/components/MainHeaderBackground";
+import MainHeader from "@/components/main-header/MainHeader";
+import MainHeaderBackground from "@/components/main-header/MainHeaderBackground";
 
 export const metadata: Metadata = {
   title: "Foodies App",

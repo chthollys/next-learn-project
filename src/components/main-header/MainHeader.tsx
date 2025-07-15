@@ -1,5 +1,5 @@
-import Link from "next/link";
 import Image from "next/image";
+import NavLink from "../NavLink";
 
 import logoImg from "~/public/images/logo.png";
 import classes from "./MainHeader.module.css";
@@ -7,7 +7,7 @@ import classes from "./MainHeader.module.css";
 export default function MainHeader() {
   return (
     <header className={classes.header}>
-      <Link href="/" className={classes.logo}>
+      <NavLink href="/" className={classes.logo}>
         <Image
           src={logoImg.src}
           width={logoImg.width}
@@ -16,15 +16,15 @@ export default function MainHeader() {
           alt="A plate with food on it"
         />
         Foodies
-      </Link>
+      </NavLink>
 
       <nav className={classes.nav}>
         <ul>
           <li>
-            <Link href="/meals">Browse Meals</Link>
+            <NavLink href="/meals">Browse Meals</NavLink>
           </li>
           <li>
-            <Link href="/community">Foodies Community</Link>
+            <NavLink href="/community">Foodies Community</NavLink>
           </li>
         </ul>
       </nav>
