@@ -22,3 +22,14 @@ export type Meal = {
   creator: string;
   creator_email: string;
 };
+
+export interface MealPageProps {
+  params: {
+    mealSlug: string;
+  };
+}
+
+export interface ImagePickerProps {
+  name: string;
+  label: string;
+}
