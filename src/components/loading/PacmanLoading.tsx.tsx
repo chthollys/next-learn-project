@@ -1,4 +1,5 @@
 import { PacmanLoader } from "react-spinners";
+import { ClassNameValue, twMerge } from "tailwind-merge";
 
 interface PacmanLoadingProps {
   /**
@@ -16,24 +17,22 @@ interface PacmanLoadingProps {
    * @default "#faff20"
    */
   color?: string;
-  classTW?: string;
-  isTWReset?: boolean;
+  /**
+   * Classes in Tailwind
+   */
+  className?: ClassNameValue;
 }
 
 export default function PacmanLoading({
   loadingMsg = "Loading",
   size = 45,
   color = "#faff20",
-  classTW,
-  isTWReset = false,
+  className,
 }: PacmanLoadingProps) {
-  let classes =
-    "inset-0 mx-auto flex w-fit flex-col items-center justify-center gap-5 bg-transparent";
-  if (classTW && !isTWReset) {
-    classes += ` ${classTW}`;
-  } else if (classTW && isTWReset) {
-    classes = classTW;
-  }
+  const classes = twMerge(
+    "inset-0 mx-auto flex w-fit flex-col items-center justify-center gap-5 bg-transparent",
+    className,
+  );
 
   return (
     <div className={classes}>
