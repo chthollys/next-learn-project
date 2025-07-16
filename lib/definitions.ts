@@ -30,6 +30,6 @@ export interface MealPageProps {
 }
 
 export interface ImagePickerProps {
-  name: string;
-  label: string;
+  name?: string;
+  label?: string;
 }
