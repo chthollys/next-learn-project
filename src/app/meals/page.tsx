@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import PacmanLoading from "@/components/PacmanLoading.tsx";
+import PacmanLoading from "@/components/loading/PacmanLoading.tsx";
 import { getAllMeals } from "~/lib/data";
 import classes from "./page.module.css";
 import MealsGrid from "@/components/meals/MealsGrid";
