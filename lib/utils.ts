@@ -1,5 +1,6 @@
 import DOMPurify from "dompurify";
 import { JSDOM } from "jsdom";
+// import xss from "xss";
 
 export const sanitizeHtml = (dirtyHtml: string) => {
   const { window } = new JSDOM("");
@@ -10,3 +11,33 @@ export const sanitizeHtml = (dirtyHtml: string) => {
 export const convertLineBreakToHtml = (text: string) => {
   return text.replace(/\n/g, "<br />");
 };
+
+// export const sanitizeObject = <T extends { [key: string]: string | number }>(
+//   obj: T,
+//   keysToSkip?: string | string[],
+// ): T => {
+//   const sanitizedObject = {} as T;
+
+//   const skipSet = new Set(
+//     Array.isArray(keysToSkip) ? keysToSkip : keysToSkip ? [keysToSkip] : [],
+//   );
+
+//   // Iterate over each key in the input object.
+//   for (const key in obj) {
+//     // Ensure the key is an own property of the object, not from the prototype chain.
+//     if (Object.prototype.hasOwnProperty.call(obj, key)) {
+//       const value = obj[key];
+
+//       // Check if the value is a string and the key is not in our skip set.
+//       if (typeof value === "string" && !skipSet.has(key)) {
+//         // If it's a string and not excluded, sanitize it.
+//         sanitizedObject[key] = xss(value) as any;
+//       } else {
+//         // Otherwise, copy the original value.
+//         sanitizedObject[key] = value;
+//       }
+//     }
+//   }
+
+//   return sanitizedObject;
+// };
