@@ -7,6 +7,11 @@ export interface NavLinkProps extends NextLinkProps {
   children: React.ReactNode;
 }
 
+export interface ErrorProps {
+  error: Error & { digest?: string };
+  reset: () => void;
+}
+
 export type Meal = {
   id: number;
   slug: string;
