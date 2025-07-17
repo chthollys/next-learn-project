@@ -1,5 +1,6 @@
 "use server";
 
+import { redirect } from "next/navigation";
 import { saveMeal } from "./data";
 import { MealFormSchema, ErrorObject, NewMeal } from "./definitions";
 import { streamImage } from "./server-utils";
@@ -36,5 +37,7 @@ export const shareMeal = async (formData: FormData) => {
     console.log("New meal created: ", createdMeal);
   } catch (error) {
     console.error("Error occurred in shareMeal action.ts.", error);
+    throw new ErrorObject("Meal creation failed", 500);
   }
+  redirect("/meals");
 };
