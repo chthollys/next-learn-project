@@ -12,6 +12,7 @@ export default function ShareMealPage() {
   const [formState, formAction] = useActionState(shareMeal, {
     messages: null,
     errors: null,
+    data: null,
   });
   return (
     <>
@@ -20,6 +21,11 @@ export default function ShareMealPage() {
           Share your <span className={classes.highlight}>favorite meal</span>
         </h1>
         <p>Or any other meal you feel needs sharing!</p>
+        {formState.messages && (
+          <p className="font-extralight tracking-wide text-red-500">
+            {formState.messages}
+          </p>
+        )}
       </header>
       <main className={classes.main}>
         <form className={classes.form} action={formAction}>
@@ -29,6 +35,7 @@ export default function ShareMealPage() {
                 id="name"
                 name="name"
                 label="Your name"
+                defaultValue={formState.data?.name}
                 errorMsg={formState.errors?.fieldErrors.name?.[0]}
                 required
               />
@@ -39,6 +46,7 @@ export default function ShareMealPage() {
                 name="email"
                 label="Your email"
                 type="email"
+                defaultValue={formState.data?.email}
                 errorMsg={formState.errors?.fieldErrors.email?.[0]}
                 required
               />
@@ -49,6 +57,7 @@ export default function ShareMealPage() {
               id="title"
               name="title"
               label="Title"
+              defaultValue={formState.data?.title}
               errorMsg={formState.errors?.fieldErrors.title?.[0]}
               required
             />
@@ -58,21 +67,23 @@ export default function ShareMealPage() {
               id="summary"
               name="summary"
               label="Short Summary"
+              defaultValue={formState.data?.summary}
               errorMsg={formState.errors?.fieldErrors.summary?.[0]}
               required
             />
           </div>
-          <p>
+          <div>
             <Input
               textArea
               id="instructions"
               name="instructions"
               label="Instructions"
+              defaultValue={formState.data?.instructions}
               rows={10}
               errorMsg={formState.errors?.fieldErrors.instructions?.[0]}
               required
             />
-          </p>
+          </div>
           <ImagePicker name="image" label="Food's Image" />
           <p className={classes.actions}>
             <FormButton label="Share your meal" />

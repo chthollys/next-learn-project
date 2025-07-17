@@ -2,7 +2,12 @@
 
 import { revalidatePath } from "next/cache";
 import { saveMeal } from "./data";
-import { MealFormSchema, NewMeal, ShareMealFormState } from "./definitions";
+import {
+  FormMeal,
+  MealFormSchema,
+  NewMeal,
+  ShareMealFormState,
+} from "./definitions";
 import { streamImage } from "./server-utils";
 import { z } from "zod";
 import { redirect } from "next/navigation";
@@ -18,11 +23,16 @@ export const shareMeal = async (
     error: validationErr,
   } = MealFormSchema.safeParse(mealObj);
 
+  console.log("Data : ", data);
   // Validation with zod schema
   if (!success) {
     const errors = z.flattenError(validationErr);
     console.log("Error produced: ", errors);
-    return { errors, messages: "Validation failed." };
+    return {
+      errors,
+      messages: "Input contain invalid value, please check your input again.",
+      data: mealObj as FormMeal,
+    };
   }
 
   const { imgPath } = await streamImage(data.image, {

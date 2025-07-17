@@ -5,15 +5,29 @@ export default function Input({
   id = name,
   label,
   type = "text",
-  textArea,
+  defaultValue,
   errorMsg,
+  textArea,
   children = undefined,
   ...props
 }: InputProps) {
-  let input = <input type={type} id={id} name={name} {...props} />;
+  let input = (
+    <input
+      type={type}
+      id={id}
+      name={name}
+      defaultValue={defaultValue ?? ""}
+      {...props}
+    />
+  );
   if (textArea) {
     input = (
-      <textarea id={id} name={name} {...props}>
+      <textarea
+        id={id}
+        name={name}
+        defaultValue={defaultValue ?? ""}
+        {...props}
+      >
         {children}
       </textarea>
     );
@@ -23,7 +37,7 @@ export default function Input({
       <div className="mb-[6px] flex items-center gap-5 text-lg">
         <label htmlFor={id}>{label}</label>
         {errorMsg && (
-          <p className="font-extralight text-red-500 tracking-wide">{`(${errorMsg})`}</p>
+          <p className="font-extralight tracking-wide text-red-500">{`(${errorMsg})`}</p>
         )}
       </div>
       {input}

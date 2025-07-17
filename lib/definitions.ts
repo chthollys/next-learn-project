@@ -101,6 +101,7 @@ export interface InputProps {
   id?: string;
   label: string;
   type?: HTMLInputTypeAttribute;
+  defaultValue?: string | undefined;
   textArea?: boolean;
   required?: boolean;
   rows?: number;
@@ -116,4 +117,5 @@ export interface FormButtonProps {
 export interface ShareMealFormState {
   messages?: string | null;
   errors?: FormMealErrorObj | null;
+  data?: FormMeal | null;
 }
