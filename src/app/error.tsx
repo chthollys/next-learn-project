@@ -20,6 +20,7 @@ export default function ErrorPage({ error }: ErrorProps) {
       </div>
       <p className="text-center text-2xl font-bold tracking-widest text-yellow-500">
         Error Message: {error.message}
+        {error.info?.additionalInfo && <p>{error.info.additionalInfo}</p>}
       </p>
     </main>
   );

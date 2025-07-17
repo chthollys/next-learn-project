@@ -4,7 +4,6 @@ import { NewMeal, Meal, ErrorObject } from "./definitions";
 import { prisma } from "./prisma";
 import xss from "xss";
 import slugify from "slugify";
-import { sl } from "zod/v4/locales";
 
 export const getAllMeals = async (): Promise<Meal[]> => {
   await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -35,8 +34,8 @@ export const saveMeal = async ({
   creator_email,
   title,
   summary,
-  image,
   instructions,
+  image,
 }: NewMeal) => {
   const slug = slugify(title, { lower: true });
   const newData = {
@@ -45,14 +44,12 @@ export const saveMeal = async ({
     creator_email: xss(creator_email),
     title: xss(title),
     summary: xss(summary),
-    image,
+    image: xss(image),
     instructions: xss(instructions),
   };
   try {
-    const response = await prisma.meal.createManyAndReturn({
-      data: [newData],
-    });
-    console.log("Successfully created new user: ", response);
+    const response = await prisma.meal.create({ data: newData });
+    return response;
   } catch (error) {
     console.error("Failed to create new meal.", error);
     throw new ErrorObject(

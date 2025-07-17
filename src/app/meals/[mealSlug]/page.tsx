@@ -3,7 +3,8 @@ import Image from "next/image";
 
 import { getMeal } from "~/lib/data";
 import { MealPageProps } from "~/lib/definitions";
-import { convertLineBreakToHtml, sanitizeHtml } from "~/lib/utils";
+import { sanitizeHtml } from "~/lib/server-utils";
+import { convertLineBreakToHtml } from "~/lib/utils";
 import classes from "./page.module.css";
 
 export default async function MealPage({ params }: MealPageProps) {
@@ -13,7 +14,7 @@ export default async function MealPage({ params }: MealPageProps) {
     notFound();
   }
 
-  const sanitizedInstructions = sanitizeHtml(
+  const sanitizedInstructions = await sanitizeHtml(
     convertLineBreakToHtml(meal.instructions),
   );
 

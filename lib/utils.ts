@@ -1,16 +1,7 @@
-import DOMPurify from "dompurify";
-import { JSDOM } from "jsdom";
-// import xss from "xss";
-
-export const sanitizeHtml = (dirtyHtml: string) => {
-  const { window } = new JSDOM("");
-  const purify = DOMPurify(window);
-  return purify.sanitize(dirtyHtml);
-};
-
 export const convertLineBreakToHtml = (text: string) => {
   return text.replace(/\n/g, "<br />");
 };
+
 
 // export const sanitizeObject = <T extends { [key: string]: string | number }>(
 //   obj: T,
