@@ -42,7 +42,7 @@ export default function ImagePicker({
         <input
           ref={imageInput}
           type="file"
-          accept="image/png, image/jpeg"
+          accept="image/png, image/jpeg, image/jpg"
           id={name}
           name={name}
           className={classes.input}

@@ -31,7 +31,6 @@
 
 .form label {
   display: block;
-  margin-bottom: 0.5rem;
   font-size: 1rem;
   font-family: "Montserrat", sans-serif;
   text-transform: uppercase;
@@ -63,7 +62,7 @@
   gap: 1rem;
 }
 
-.row p {
+.row div {
   width: 100%;
 }
 

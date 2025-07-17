@@ -1,25 +1,26 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { saveMeal } from "./data";
-import { MealFormSchema, ErrorObject, NewMeal } from "./definitions";
+import { MealFormSchema, NewMeal, ShareMealFormState } from "./definitions";
 import { streamImage } from "./server-utils";
+import { z } from "zod";
 
-export const shareMeal = async (formData: FormData) => {
+export const shareMeal = async (
+  prevState: ShareMealFormState,
+  formData: FormData,
+): Promise<ShareMealFormState> => {
   const mealObj = Object.fromEntries(formData.entries());
   const {
     success,
     data,
     error: validationErr,
   } = MealFormSchema.safeParse(mealObj);
+
+  // Validation with zod schema
   if (!success) {
-    const error = new ErrorObject(
-      "Error occurred in submitting new meal",
-      406,
-      validationErr.message,
-    );
-    console.log(error.info?.additionalInfo); // development only
-    throw error;
+    const errors = z.flattenError(validationErr);
+    console.log("Error produced: ", errors);
+    return { errors, messages: "Validation failed." };
   }
   try {
     const { imgPath } = await streamImage(data.image, {
@@ -35,9 +36,14 @@ export const shareMeal = async (formData: FormData) => {
     };
     const createdMeal = await saveMeal(newMealData);
     console.log("New meal created: ", createdMeal);
+    return {
+      messages: "New meal created.",
+      errors: null,
+    };
   } catch (error) {
     console.error("Error occurred in shareMeal action.ts.", error);
-    throw new ErrorObject("Meal creation failed", 500);
+    return {
+      messages: "Error occurred in shareMeal action.ts.",
+    };
   }
-  redirect("/meals");
 };

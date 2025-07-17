@@ -25,7 +25,7 @@ export const getMeal = async (slug: string): Promise<Meal | null> => {
     });
   } catch (error) {
     console.error(`Failed to fetch meal with a slug of ${slug}: `, error);
-    throw new ErrorObject("Failed to fetch meal", 500, `slug: ${slug}`);
+    throw new ErrorObject("Failed to fetch meal", 500);
   }
 };
 
@@ -52,10 +52,6 @@ export const saveMeal = async ({
     return response;
   } catch (error) {
     console.error("Failed to create new meal.", error);
-    throw new ErrorObject(
-      "Failed to create new meal.",
-      500,
-      `Failed for meal title: ${newData.title}`,
-    );
+    throw new ErrorObject("Failed to create new meal.", 500);
   }
 };

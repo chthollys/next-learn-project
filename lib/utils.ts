@@ -1,7 +1,29 @@
+import { FormMealErrorObjTree } from "./definitions";
+
+export const isKey = <T extends object>(
+  obj: T,
+  k: PropertyKey,
+): k is keyof T => {
+  return k in obj;
+};
+
 export const convertLineBreakToHtml = (text: string) => {
   return text.replace(/\n/g, "<br />");
 };
 
+export const getErrorMessages = ({
+  // errors,
+  properties,
+}: FormMealErrorObjTree): string[] | null => {
+  const errorArrays: string[][] = [];
+  if (!properties) return null;
+  Object.keys(properties).forEach((k) => {
+    if (isKey(properties, k) && properties[k]) {
+      errorArrays.push(properties[k].errors);
+    }
+  });
+  return errorArrays.flat();
+};
 
 // export const sanitizeObject = <T extends { [key: string]: string | number }>(
 //   obj: T,

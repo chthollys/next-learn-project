@@ -3,7 +3,7 @@ import notFoundImg1 from "~/assets/icons/ghostNotFound-1.png";
 import notFoundImg2 from "~/assets/icons/ghostNotFound-2.png";
 
 export default function NotFoundPage() {
-  const dimension = 180;
+  const DIMENSION = 180;
 
   return (
     <main className="flex flex-col gap-12 text-center">
@@ -11,14 +11,14 @@ export default function NotFoundPage() {
         <Image
           src={notFoundImg1.src}
           alt="Not Found Icon 1"
-          width={dimension}
-          height={dimension}
+          width={DIMENSION}
+          height={DIMENSION}
         />
         <Image
           src={notFoundImg2.src}
           alt="Not Found Icon 2"
-          width={dimension}
-          height={dimension}
+          width={DIMENSION}
+          height={DIMENSION}
         />
       </div>
       <div>
