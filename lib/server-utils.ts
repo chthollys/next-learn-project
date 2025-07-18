@@ -65,9 +65,10 @@ export const uploadImageToS3 = async (
     };
     const command = new PutObjectCommand(params);
     await s3Client.send(command);
+    const imgUrl = `https://s3.${process.env.AWS_S3_REGION}.amazonaws.com/${process.env.AWS_S3_BUCKET_NAME}/${key}`;
     return {
       success: true,
-      imgUrl: `https://${process.env.AWS_S3_BUCKET_NAME}.${process.env.AWS_S3_REGION}.s3.amazonaws.com/${key}`,
+      imgUrl,
     };
   } catch (error) {
     let errorMsg = "Error occurred in uploading image.";
