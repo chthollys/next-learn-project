@@ -2,22 +2,11 @@
 
 A full-stack web application built with Next.js for a community of food lovers. It allows users to share, discover, and browse various meal recipes. The project leverages server-side rendering, server actions for mutations, and a PostgreSQL database with Prisma for data management.
 
-## Features
-
-- **Browse Meals**: Users can browse a dynamic grid of user-submitted meals with beautiful images and short descriptions.
-- **View Meal Details**: Each meal has a dedicated, server-rendered page with a detailed recipe, including creator information and step-by-step instructions.
-- **Share Meals**: An intuitive form allows users to share their own meal recipes, including uploading an image. This form uses Next.js Server Actions for submission and data persistence.
-- **Engaging Homepage**: The homepage features an elegant, fading image slideshow of delicious meals to welcome users.
-- **Community Page**: A dedicated page for the foodies community, showcasing the spirit of sharing and connection.
-- **Robust Data Management**: Uses Prisma as an ORM to interact with a PostgreSQL database for all meal data.
-- **Loading & Error States**: The application provides suspense-based loading indicators (`loading.tsx`) and custom error pages (`error.tsx`, `not-found.tsx`) for a seamless user experience.
-- **Responsive Design**: Styled with CSS Modules for component-scoped styles that adapt to different screen sizes.
-
 ## Tech Stack
 
 This project is built with a modern tech stack, including:
 
-- **Framework**: [Next.js](https://nextjs.org/) (App Router)
+- **Framework**: [Next.js](https://nextjs.org/)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **Database**: [PostgreSQL](https://www.postgresql.org/)
 - **ORM**: [Prisma](https://www.prisma.io/)
