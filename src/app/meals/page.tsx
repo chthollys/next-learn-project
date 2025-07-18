@@ -7,6 +7,13 @@ import MealsGrid from "@/components/meals/MealsGrid";
 
 async function Meals() {
   const meals = await getAllMeals();
+  if (meals.length < 1) {
+    return (
+      <p className="p-4 text-center text-3xl font-bold tracking-wider text-white">
+        Create your first meal for this app.
+      </p>
+    );
+  }
   return <MealsGrid meals={meals} />;
 }
 
