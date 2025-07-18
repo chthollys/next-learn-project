@@ -10,6 +10,7 @@ import { JSDOM } from "jsdom";
 import { ErrorObject, StreamImageConfigObj } from "./definitions";
 import fs from "node:fs";
 import path from "node:path";
+import { randomUUID } from "node:crypto";
 
 const s3Client = new S3Client({
   region: process.env.AWS_S3_REGION,
@@ -53,8 +54,7 @@ export const uploadImageToS3 = async (
 ): Promise<{ success: boolean; error?: string | null; imgUrl?: string }> => {
   try {
     const buffer = Buffer.from(await image.arrayBuffer());
-    const extension = image.name.split(".").pop();
-    const filename = `${Date.now()}-${image.name.replace(/\..+$/, "")}${extension}`;
+    const filename = `${randomUUID()}-${image.name.replace(/\..+$/, "")}`;
     const key = `images/${filename}`;
 
     const params: PutObjectCommandInput = {
