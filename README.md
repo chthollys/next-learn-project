@@ -1,29 +1,28 @@
 # Foodies App
 
-A full-stack web application built with Next.js for a community of food lovers. It allows users to share, discover, and browse various meal recipes.
+A full-stack web application built with Next.js for a community of food lovers. It allows users to share, discover, and browse various meal recipes. The project leverages server-side rendering, server actions for mutations, and a PostgreSQL database with Prisma for data management.
 
 ## Features
 
-- **Browse Meals**: Users can browse a list of meals with beautiful images and short descriptions.
-- **View Meal Details**: Each meal has a dedicated page with a detailed recipe, including instructions and ingredients.
-- **Image Slideshow**: The homepage features an engaging image slideshow of various delicious meals.
-- **Community Page**: A dedicated page for the foodies community, encouraging users to share recipes and connect with others.
-- **Share Meals**: A page for users to share their own meal recipes with the community.
-- **Loading States**: The application provides loading indicators while fetching data.
-- **Error Handling**: Custom error pages are implemented for a better user experience in case of errors.
-- **Not Found Page**: A custom 404 page for handling invalid URLs.
+- **Browse Meals**: Users can browse a dynamic grid of user-submitted meals with beautiful images and short descriptions.
+- **View Meal Details**: Each meal has a dedicated, server-rendered page with a detailed recipe, including creator information and step-by-step instructions.
+- **Share Meals**: An intuitive form allows users to share their own meal recipes, including uploading an image. This form uses Next.js Server Actions for submission and data persistence.
+- **Engaging Homepage**: The homepage features an elegant, fading image slideshow of delicious meals to welcome users.
+- **Community Page**: A dedicated page for the foodies community, showcasing the spirit of sharing and connection.
+- **Robust Data Management**: Uses Prisma as an ORM to interact with a PostgreSQL database for all meal data.
+- **Loading & Error States**: The application provides suspense-based loading indicators (`loading.tsx`) and custom error pages (`error.tsx`, `not-found.tsx`) for a seamless user experience.
+- **Responsive Design**: Styled with CSS Modules for component-scoped styles that adapt to different screen sizes.
 
 ## Tech Stack
 
 This project is built with a modern tech stack, including:
 
-- **Framework**: [Next.js](https://nextjs.org/)
+- **Framework**: [Next.js](https://nextjs.org/) (App Router)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) with PostCSS and autoprefixer.
 - **Database**: [PostgreSQL](https://www.postgresql.org/)
 - **ORM**: [Prisma](https://www.prisma.io/)
-- **Linting**: [ESLint](https://eslint.org/) with custom configurations.
-- **Formatting**: [Prettier](https://prettier.io/)
+- **Styling**: [CSS Modules](https://github.com/css-modules/css-modules)
+- **Linting**: [ESLint](https://eslint.org/)
 - **Package Manager**: [npm](https://www.npmjs.com/)
 
 ## Getting Started
@@ -32,32 +31,52 @@ To get a local copy up and running, follow these simple steps.
 
 ### Prerequisites
 
-- Node.js (v18.18.0 or later)
+- Node.js (v18 or later)
 - npm
+- A running PostgreSQL database instance.
 
-### Installation
+### Installation & Setup
 
-1. Clone the repo
+1. **Clone the repository**
 
    ```sh
-   git clone [https://github.com/chthollys/next-learn-project.git](https://github.com/chthollys/next-learn-project.git)
+   git clone [https://github.com/your-username/next-learn-project.git](https://github.com/your-username/next-learn-project.git)
+   cd next-learn-project
    ```
 
-2. Install NPM packages
+2. **Install NPM packages**
 
    ```sh
    npm install
    ```
 
-3. Set up your `.env` file with the database connection string.
+3. **Set up environment variables**
+   Create a `.env` file in the root of the project and add your database connection string. See `.env.example` for reference.
 
-### Running
+   ```env
+   DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=public"
+   ```
 
-First, run the development server:
+4. **Run database migrations**
+   This will apply the database schema defined in `prisma/schema.prisma`.
 
-```bash
+   ```sh
+   npx prisma migrate dev
+   ```
+
+5. **Seed the database with initial data**
+   This will populate the database with the dummy meals from `prisma/seed.ts`.
+
+   ```sh
+   npx prisma db seed
+   ```
+
+### Running the Development Server
+
+Now, you can run the development server:
+
+````bash
 npm run dev
-```
 
 Open [localhost](http://localhost:3000) with your browser to see the result.
 
@@ -80,7 +99,7 @@ The project follows a standard Next.js app directory structure.
 ├── next.config.js        # Next.js configuration
 ├── package.json          # Project dependencies and scripts
 └── tsconfig.json         # TypeScript configuration
-```
+````
 
 ### Contributing
 
