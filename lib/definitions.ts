@@ -115,7 +115,7 @@ export interface FormButtonProps {
 }
 
 export interface ShareMealFormState {
-  messages?: string | null;
-  errors?: FormMealErrorObj | null;
-  data?: FormMeal | null;
+  message: string | null;
+  errors: FormMealErrorObj | null;
+  data: FormMeal | null;
 }

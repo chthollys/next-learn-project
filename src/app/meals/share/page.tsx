@@ -10,7 +10,7 @@ import classes from "./page.module.css";
 
 export default function ShareMealPage() {
   const [formState, formAction] = useActionState(shareMeal, {
-    messages: null,
+    message: null,
     errors: null,
     data: null,
   });
@@ -21,9 +21,9 @@ export default function ShareMealPage() {
           Share your <span className={classes.highlight}>favorite meal</span>
         </h1>
         <p>Or any other meal you feel needs sharing!</p>
-        {formState.messages && (
+        {formState.message && (
           <p className="font-extralight tracking-wide text-red-500">
-            {formState.messages}
+            {formState.message}
           </p>
         )}
       </header>

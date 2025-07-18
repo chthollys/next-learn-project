@@ -8,7 +8,7 @@ import {
   NewMeal,
   ShareMealFormState,
 } from "./definitions";
-import { streamImage } from "./server-utils";
+import { uploadImageToS3 } from "./server-utils";
 import { z } from "zod";
 import { redirect } from "next/navigation";
 
@@ -23,37 +23,51 @@ export const shareMeal = async (
     error: validationErr,
   } = MealFormSchema.safeParse(mealObj);
 
-  console.log("Data : ", data);
   // Validation with zod schema
   if (!success) {
     const errors = z.flattenError(validationErr);
     console.log("Error produced: ", errors);
     return {
       errors,
-      messages: "Input contain invalid value, please check your input again.",
+      message: "Input contain invalid value, please check your input again.",
       data: mealObj as FormMeal,
     };
   }
 
-  const { imgPath } = await streamImage(data.image, {
-    location: "/images",
-  });
+  const {
+    success: uploadSuccess,
+    imgUrl,
+    error,
+  } = await uploadImageToS3(data.image);
+  if ((!uploadSuccess || !imgUrl) && error) {
+    return {
+      message: error,
+      data: mealObj as FormMeal,
+      errors: null,
+    };
+  }
   const newMealData: NewMeal = {
     title: data.title,
     summary: data.summary,
     creator: data.name,
     creator_email: data.email,
     instructions: data.instructions,
-    image: imgPath,
+    image: imgUrl!,
   };
 
   try {
     const createdMeal = await saveMeal(newMealData);
     console.log("New meal created: ", createdMeal);
   } catch (error) {
-    console.error("Error occurred in shareMeal action.ts.", error);
+    let errorMsg = "Failed to create new meal.";
+    if (error instanceof Error) {
+      errorMsg = error.message;
+    }
+    console.error("Error occurred in shareMeal action.ts: ", errorMsg);
     return {
-      messages: "Error occurred in shareMeal action.ts.",
+      message: errorMsg,
+      errors: null,
+      data: null,
     };
   }
 
