@@ -15,7 +15,7 @@ export const sanitizeHtml = async (dirtyHtml: string) => {
 export const streamImage = async (
   image: File,
   { name, location }: StreamImageConfigObj,
-) => {
+): Promise<{ imgPath: string }> => {
   const extension = path.extname(image.name);
   const filename = `${name ?? image.name.replace(/\..+$/, "")}${extension}`;
   const urlPath = path.join(location, filename);
